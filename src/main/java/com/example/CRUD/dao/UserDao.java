@@ -1,6 +1,7 @@
 package com.example.CRUD.dao;
 
 import com.example.CRUD.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface UserDao {
     void updateUser(int id, User user);
 
     User showUser(int id);
+
+    UserDetails getUser(String username);
 }

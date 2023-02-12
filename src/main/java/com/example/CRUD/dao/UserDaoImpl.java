@@ -2,6 +2,8 @@ package com.example.CRUD.dao;
 
 import com.example.CRUD.model.User;
 import javax.persistence.*;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,8 +12,12 @@ import java.util.List;
 @Repository
 public class UserDaoImpl implements UserDao {
 
-    @PersistenceContext
+
     private EntityManager entityManager ;
+
+    public UserDaoImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 
     @Override
     public List<User> getAllUsers() {
@@ -21,7 +27,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void createUser(User user) {
-        entityManager.persist(user);
+        entityManager.merge(user);
     }
 
     @Override
@@ -35,12 +41,22 @@ public class UserDaoImpl implements UserDao {
         userToBeUpdate.setName(user.getName());
         userToBeUpdate.setLastName(user.getLastName());
         userToBeUpdate.setAge(user.getAge());
+        userToBeUpdate.setEmail(user.getEmail());
+        userToBeUpdate.setPassword(user.getPassword());
+        userToBeUpdate.setRoles(user.getRoles());
         entityManager.merge(userToBeUpdate);
     }
 
     @Override
     public User showUser(int id) {
         return entityManager.find(User.class, id);
+    }
+
+    @Override
+    public UserDetails getUser(String username) {
+        return entityManager.createQuery(
+                        "SELECT u FROM User u WHERE u.name = :username", User.class).setParameter("username", username)
+                .getSingleResult();
     }
 
 }

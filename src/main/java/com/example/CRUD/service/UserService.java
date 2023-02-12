@@ -1,10 +1,11 @@
 package com.example.CRUD.service;
 
 import com.example.CRUD.model.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
 
     List<User> getAllUsers();
 

@@ -30,14 +30,23 @@
     <input name="password" type="text" id="password"/>
 
     <br/>
+    <p>
+        <label>Roles:
+            <input type="checkbox" name="roleList"
+                   th:each="roles : ${roleList}"
+                   th:text="${roles.getNoPrefix()}"
+                   th:value="${roles.id}"
+                   th:field="*{roles}"
+            />
+        </label>
+    </p>
 
-    <label for="role">Role</label>
-    <input name="role" type="text" id="role"/>
-
-    <br/>
-
+<br>
     <input type="submit" value="Create!"/>
-
+</form>
+<br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
 </form>
 </body>
 </html>

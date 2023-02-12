@@ -2,6 +2,8 @@ package com.example.CRUD.service;
 
 import com.example.CRUD.dao.UserDaoImpl;
 import com.example.CRUD.model.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public List<User> getAllUsers() {
         return userDaoImpl.getAllUsers();
     }
@@ -40,7 +43,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User showUser(int id) {
         return userDaoImpl.showUser(id);
+    }
+
+
+    @Transactional
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = (User)userDaoImpl.getUser(username);
+        user.getRoles().size();
+        return user;
     }
 }
