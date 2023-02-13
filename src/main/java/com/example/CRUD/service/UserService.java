@@ -13,7 +13,7 @@ public interface UserService extends UserDetailsService {
 
     void deleteUser(int id);
 
-    void updateUser(int id, User user);
+    void updateUser(User user);
 
     User showUser(int id);
 }

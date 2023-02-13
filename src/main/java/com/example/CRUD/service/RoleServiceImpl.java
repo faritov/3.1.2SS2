@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
     private final RoleDaoImpl roleDaoImpl;
 
@@ -25,31 +24,26 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    @Transactional
     public List<Role> getList() {
         return roleDaoImpl.getList();
     }
 
     @Override
-    @Transactional
     public Role getRole(Long id) {
         return roleDaoImpl.getRole(id);
     }
 
     @Override
-    @Transactional
     public void deleteRole(Long id) {
         roleDaoImpl.deleteRole(id);
-
     }
 
     @Override
-    @Transactional
     public void editRole(Role role) {
         roleDaoImpl.editRole(role);
     }
+
     @Override
-    @Transactional
     public List<Role> listByRole(List<String> name) {
         return roleDaoImpl.listByName(name);
     }

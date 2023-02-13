@@ -16,13 +16,10 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column
     private String name;
-
     @Column
     private String lastName;
-
     @Column
     private int age;
     @Column
